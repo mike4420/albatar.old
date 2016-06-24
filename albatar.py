@@ -936,7 +936,7 @@ class MSSQL_Blind(SQLi_Base):
     if not db:
       raise NotImplementedError('-D required')
 
-    c = T("SELECT LTRIM(STR(COUNT(name))) FROM %s..sysobjects WHERE xtype=CHAR(85)", db=db)
+    c = T("SELECT LTRIM(STR(COUNT(name))) FROM ${db}..sysobjects WHERE xtype=CHAR(85)", db=db)
     q = T("SELECT TOP 1 name FROM ${db}..sysobjects WHERE xtype=CHAR(85) AND name" \
           " NOT IN (SELECT TOP ${row_pos} name FROM ${db}..sysobjects WHERE xtype=CHAR(85))", db=db)
     return c, q
